@@ -59,7 +59,16 @@ export default function Home() {
   return (
     <>
       <header>
-        <h1>Expense Insight</h1>
+        <div className="header-logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="20" width="6" height="12" rx="2" fill="#7c3aed" opacity="0.7"/>
+            <rect x="13" y="13" width="6" height="19" rx="2" fill="#8b5cf6"/>
+            <rect x="22" y="8" width="6" height="24" rx="2" fill="#a78bfa"/>
+            <path d="M6 18L13 12L20 15L30 5" stroke="#c4b5fd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M26 5H30V9" stroke="#c4b5fd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <h1>Expense Insight</h1>
+        </div>
         <p>Upload Truist bank statements to track spending and account balance over time</p>
       </header>
 

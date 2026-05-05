@@ -41,8 +41,8 @@ export function BalanceChart({ statements }: { statements: Statement[] }) {
     const { labels, data } = buildChartData(statements);
     const ctx  = canvasRef.current.getContext('2d')!;
     const grad = ctx.createLinearGradient(0, 0, 0, 280);
-    grad.addColorStop(0, 'rgba(79,70,229,0.18)');
-    grad.addColorStop(1, 'rgba(79,70,229,0)');
+    grad.addColorStop(0, 'rgba(167,139,250,0.35)');
+    grad.addColorStop(1, 'rgba(167,139,250,0)');
 
     const chart = new Chart(ctx, {
       type: 'line',
@@ -51,12 +51,12 @@ export function BalanceChart({ statements }: { statements: Statement[] }) {
         datasets: [{
           label: 'Account Balance',
           data,
-          borderColor: '#4f46e5',
+          borderColor: '#a78bfa',
           backgroundColor: grad,
           fill: true,
           tension: 0.4,
-          pointBackgroundColor: '#4f46e5',
-          pointBorderColor: '#fff',
+          pointBackgroundColor: '#a78bfa',
+          pointBorderColor: 'rgba(5,0,15,0.8)',
           pointBorderWidth: 2,
           pointRadius: 5,
           pointHoverRadius: 7,
@@ -69,6 +69,12 @@ export function BalanceChart({ statements }: { statements: Statement[] }) {
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(15,5,35,0.92)',
+            borderColor: 'rgba(139,92,246,0.4)',
+            borderWidth: 1,
+            titleColor: 'rgba(196,181,253,0.85)',
+            bodyColor: '#ffffff',
+            padding: 10,
             callbacks: {
               label: (c) => ' Balance: ' + fmt(c.parsed.y ?? 0),
             },
@@ -77,13 +83,16 @@ export function BalanceChart({ statements }: { statements: Statement[] }) {
         scales: {
           y: {
             ticks: {
+              color: 'rgba(196,181,253,0.65)',
               callback: (v) => '$' + Number(v).toLocaleString('en-US', { maximumFractionDigits: 0 }),
             },
-            grid: { color: 'rgba(0,0,0,0.05)' },
+            grid: { color: 'rgba(139,92,246,0.1)' },
+            border: { color: 'transparent' },
           },
           x: {
             grid: { display: false },
-            ticks: { maxRotation: 30 },
+            border: { color: 'transparent' },
+            ticks: { maxRotation: 30, color: 'rgba(196,181,253,0.65)' },
           },
         },
       },
