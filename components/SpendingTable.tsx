@@ -32,7 +32,7 @@ export function SpendingTable({ statements }: { statements: Statement[] }) {
             <th style={{ color: 'var(--investments)' }}>Investments</th>
             <th style={{ color: 'var(--deposit)' }}>Deposit</th>
             {hasMisc && <th style={{ color: 'var(--misc)' }}>Misc</th>}
-            <th>Net</th>
+            <th>Cash Flow</th>
             <th>Closing Balance</th>
           </tr>
         </thead>

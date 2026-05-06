@@ -108,8 +108,8 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = 'rgba(91,33,182,0.55)';
-        ctx.font = '600 11px Inter, sans-serif';
-        ctx.fillText('NET', cx, cy - 14);
+        ctx.font = '600 10px Inter, sans-serif';
+        ctx.fillText('CASH FLOW', cx, cy - 14);
         ctx.fillStyle = '#1e1b4b';
         ctx.font = '800 20px Inter, sans-serif';
         ctx.fillText(fmt(net), cx, cy + 10);
@@ -155,6 +155,7 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
   }, [statements]);
 
   return (
+    <>
     <div className="donut-layout">
       <div style={{ flexShrink: 0, width: 220, height: 220 }}>
         <canvas ref={canvasRef} />
@@ -181,5 +182,9 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
         })}
       </div>
     </div>
+    <p style={{ marginTop: 14, fontSize: 11, color: '#9ca3af', textAlign: 'center' }}>
+      * Cash flow = Deposits − (Purchases + Recurring + Investments + Misc)
+    </p>
+    </>
   );
 }
