@@ -55,6 +55,8 @@ export default function Home() {
     setStatements(prev => prev.filter((_, i) => i !== idx));
   }, []);
 
+  const clearAll = useCallback(() => setStatements([]), []);
+
   const hasStatements = statements.length > 0;
 
   return (
@@ -98,6 +100,7 @@ export default function Home() {
                   </button>
                 </span>
               ))}
+              <button className="chip-clear-all" onClick={clearAll}>Clear all</button>
             </div>
 
             <div className="section-block">

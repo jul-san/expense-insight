@@ -263,6 +263,25 @@ main {
 
 .chip-remove:hover { color: var(--danger); }
 
+.chip-clear-all {
+  background: none;
+  border: 1px solid rgba(220,38,38,0.25);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--danger);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.chip-clear-all:hover {
+  opacity: 1;
+  background: rgba(220,38,38,0.07);
+}
+
 /* ── Section card ─────────────────────────────────────────────────── */
 
 .section-block {
