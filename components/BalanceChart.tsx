@@ -134,7 +134,7 @@ export function BalanceChart({ statements }: { statements: Statement[] }) {
           </button>
         </div>
       </div>
-      <canvas ref={canvasRef} style={{ maxHeight: 280 }} />
+      <canvas ref={canvasRef} style={{ maxHeight: 280, maxWidth: '100%' }} />
     </div>
   );
 }

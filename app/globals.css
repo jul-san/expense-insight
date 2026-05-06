@@ -530,6 +530,7 @@ border: 1px solid rgba(139,92,246,0.35);
 .chart-split .chart-pane {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .chart-split-divider {
@@ -538,6 +539,25 @@ border: 1px solid rgba(139,92,246,0.35);
   background: var(--border);
   flex-shrink: 0;
   margin: 0 1.75rem;
+}
+
+/* ── Spending donut layout ────────────────────────────────────────── */
+
+.donut-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 36px;
+  row-gap: 28px;
+}
+
+.donut-legend {
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 12px;
 }
 
 /* ── Responsive ───────────────────────────────────────────────────── */
@@ -551,6 +571,16 @@ border: 1px solid rgba(139,92,246,0.35);
     height: 1px;
     align-self: auto;
     margin: 1.5rem 0;
+  }
+  .donut-layout {
+    row-gap: 36px;
+  }
+  .donut-legend {
+    padding-left: 0;
+  }
+  .chart-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 }
 
