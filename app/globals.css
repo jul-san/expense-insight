@@ -20,6 +20,7 @@
   --purchase: #4f46e5;
   --recurring: #0f766e;
   --misc: #9333ea;
+  --income: #16a34a;
   --danger: #dc2626;
 
   --accent: #6d28d9;
@@ -35,6 +36,7 @@ body {
   position: relative;
   overflow-x: hidden;
 }
+
 
 
 
@@ -306,6 +308,7 @@ tr:last-child td { border-bottom: none; }
 .td-purchase { color: var(--purchase); font-weight: 500; }
 .td-recurring{ color: var(--recurring); font-weight: 500; }
 .td-misc     { color: var(--misc); font-weight: 500; }
+.td-income   { color: var(--income); font-weight: 500; }
 .td-total    { font-weight: 700; color: var(--text); }
 
 .row-total td {
@@ -456,6 +459,59 @@ border: 1px solid rgba(139,92,246,0.35);
   white-space: nowrap;
   text-align: right;
   color: var(--clr);
+}
+
+/* ── Chart type toggle ────────────────────────────────────────────── */
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.chart-header h2 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--purple-light);
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+.chart-toggle {
+  display: flex;
+  gap: 0;
+  background: rgba(139,92,246,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.chart-toggle button {
+  padding: 0.3rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.chart-toggle button.active {
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(124,58,237,0.45);
+}
+
+.chart-toggle button:not(.active):hover {
+  color: var(--text-sub);
+  background: rgba(139,92,246,0.12);
 }
 
 /* ── Utility ──────────────────────────────────────────────────────── */
