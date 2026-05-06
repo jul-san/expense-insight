@@ -1,4 +1,4 @@
-export type CategoryKey = 'purchase' | 'recurring' | 'misc' | 'income' | 'investments';
+export type CategoryKey = 'purchase' | 'recurring' | 'misc' | 'deposit' | 'investments';
 
 export interface Transaction {
   date: string;
@@ -15,7 +15,7 @@ export interface TransactionGroups {
   purchase: Transaction[];
   recurring: Transaction[];
   misc: Transaction[];
-  income: Transaction[];
+  deposit: Transaction[];
   investments: Transaction[];
 }
 
@@ -38,6 +38,6 @@ export const CATS: Record<CategoryKey, CategoryInfo> = {
   purchase:    { label: 'Purchases',          color: '#4f46e5' },
   recurring:   { label: 'Recurring Payments', color: '#0f766e' },
   misc:        { label: 'Miscellaneous',      color: '#9333ea' },
-  income:      { label: 'Income',             color: '#16a34a' },
+  deposit:     { label: 'Deposit',             color: '#16a34a' },
   investments: { label: 'Investments',        color: '#d97706' },
 };

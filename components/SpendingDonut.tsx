@@ -13,12 +13,12 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
   useEffect(() => {
     if (!canvasRef.current || statements.length === 0) return;
 
-    let purchase = 0, recurring = 0, misc = 0, income = 0, investments = 0;
+    let purchase = 0, recurring = 0, misc = 0, deposit = 0, investments = 0;
     for (const s of statements) {
       purchase    += sumOf(s.transactions.purchase);
       recurring   += sumOf(s.transactions.recurring);
       misc        += sumOf(s.transactions.misc);
-      income      += sumOf(s.transactions.income);
+      deposit      += sumOf(s.transactions.deposit);
       investments += sumOf(s.transactions.investments);
     }
     const grandTotal = purchase + recurring + misc + investments;
@@ -26,6 +26,7 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
     const centerTextPlugin: Plugin<'doughnut'> = {
       id: 'centerText',
       beforeDraw(chart) {
+        if (!chart.chartArea) return;
         const { ctx, chartArea: { width, height, left, top } } = chart;
         ctx.save();
         const cx = left + width / 2;
@@ -50,9 +51,9 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
       type: 'doughnut',
       plugins: [centerTextPlugin],
       data: {
-        labels: ['Purchases', 'Recurring', 'Misc', 'Investments', 'Income'],
+        labels: ['Purchases', 'Recurring', 'Misc', 'Investments', 'Deposit'],
         datasets: [{
-          data: [purchase, recurring, misc, investments, income],
+          data: [purchase, recurring, misc, investments, deposit],
           backgroundColor: [
             'rgba(79,70,229,0.8)',
             'rgba(15,118,110,0.8)',

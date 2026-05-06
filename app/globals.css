@@ -20,7 +20,7 @@
   --purchase: #4f46e5;
   --recurring: #0f766e;
   --misc: #9333ea;
-  --income: #16a34a;
+  --deposit: #16a34a;
   --investments: #d97706;
   --danger: #dc2626;
 
@@ -309,7 +309,7 @@ tr:last-child td { border-bottom: none; }
 .td-purchase { color: var(--purchase); font-weight: 500; }
 .td-recurring{ color: var(--recurring); font-weight: 500; }
 .td-misc     { color: var(--misc); font-weight: 500; }
-.td-income       { color: var(--income); font-weight: 500; }
+.td-deposit       { color: var(--deposit); font-weight: 500; }
 .td-investments  { color: var(--investments); font-weight: 500; }
 .td-total        { font-weight: 700; color: var(--text); }
 

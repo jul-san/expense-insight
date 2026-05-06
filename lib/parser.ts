@@ -101,7 +101,7 @@ function extractBalances(lines: string[]): BalanceInfo {
 // ── Transaction parsing ───────────────────────────────────────────────────────
 
 function parseTransactions(lines: string[]): TransactionGroups {
-  const groups: TransactionGroups = { purchase: [], recurring: [], misc: [], income: [], investments: [] };
+  const groups: TransactionGroups = { purchase: [], recurring: [], misc: [], deposit: [], investments: [] };
   for (const line of lines) {
     const tx = parseLine(line);
     if (tx) groups[tx.category].push(tx);
@@ -131,18 +131,28 @@ function parseLine(raw: string): Transaction | null {
   const up = description.toUpperCase();
   let category: CategoryKey;
   if (/DEBIT\s+CARD\s+PURCHASE/.test(up))       category = 'purchase';
+  else if (/DEBIT\s+CARD\s+MISC\s+DEBIT/.test(up)) category = 'purchase';
+  else if (/INT'L\s+SERVICE\s+ASSESSMENT\s+FEE/i.test(description)) category = 'purchase';
   else if (/DEBIT\s+CARD\s+RECURRING/.test(up)) category = 'recurring';
-  else if (/ZELLE\s+PAYMENT\s+TO/i.test(description))  category = 'purchase';
+  else if (/ZELLE\s+PAYMENT\s+TO/i.test(description))              category = 'purchase';
+  else if (/^TRUIST\s+ONLINE\s+TRANSFER\s+MOBILE\s+TO/i.test(description)) category = 'purchase';
   else if (
     /ZELLE\s+PAYMENT\s+FROM/i.test(description) ||
     /ACH\s+PAYMEN/i.test(description) ||
-    /PAYROLL/i.test(description)
-  )                                              category = 'income';
+    /PAYROLL/i.test(description) ||
+    /^TAX\s+REF\s+IRS/i.test(description) ||
+    /^NYSTTAXRFD/i.test(description) ||
+    /^VISA\s+MONEY\s+TRANSFER\s+CREDIT/i.test(description) ||
+    /TRUIST\s+ONLINE\s+TRANSFER\s+MOBILE\s+FROM/i.test(description) ||
+    /DEPOSIT/i.test(description) ||
+    /^TRANSFER/i.test(description)
+  )                                              category = 'deposit';
   else if (
     /ROBINHOOD/i.test(description) ||
     /COINBASE/i.test(description) ||
     /FID/i.test(description)
   )                                              category = 'investments';
+  else if (/^INTERNET\s+PAYMENT/i.test(description)) category = 'purchase';
   else                                           category = 'misc';
 
   return { date, description, amount, category };
