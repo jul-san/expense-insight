@@ -136,6 +136,9 @@ function parseLine(raw: string): Transaction | null {
   else if (/DEBIT\s+CARD\s+RECURRING/.test(up)) category = 'recurring';
   else if (/ZELLE\s+PAYMENT\s+TO/i.test(description))              category = 'purchase';
   else if (/^TRUIST\s+ONLINE\s+TRANSFER\s+MOBILE\s+TO/i.test(description)) category = 'purchase';
+  else if (/^VISA\s+MONEY\s+TRANSFER\s+DEBIT/i.test(description))  category = 'purchase';
+  else if (/^WISE\s+Wise\s+Inc/i.test(description))                category = 'purchase';
+  else if (/ATM\s+NETWORK\s+CASH\s+WITHDRAWAL/i.test(description)) category = 'purchase';
   else if (
     /ZELLE\s+PAYMENT\s+FROM/i.test(description) ||
     /ACH\s+PAYMEN/i.test(description) ||
@@ -144,6 +147,9 @@ function parseLine(raw: string): Transaction | null {
     /^NYSTTAXRFD/i.test(description) ||
     /^VISA\s+MONEY\s+TRANSFER\s+CREDIT/i.test(description) ||
     /TRUIST\s+ONLINE\s+TRANSFER\s+MOBILE\s+FROM/i.test(description) ||
+    /TRUIST\s+ONLINE\s+TRANSFER\s+ONLINE\s+FROM/i.test(description) ||
+    /DIRECT\s+DEP/i.test(description) ||
+    /DIR\s+DEP/i.test(description) ||
     /DEPOSIT/i.test(description) ||
     /^TRANSFER/i.test(description)
   )                                              category = 'deposit';
