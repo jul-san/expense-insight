@@ -97,12 +97,16 @@ export default function Home() {
             </div>
 
             <div className="section-block">
-              <BalanceChart statements={statements} />
-            </div>
-
-            <div className="section-block">
-              <h2>Spending by Category</h2>
-              <SpendingDonut statements={statements} />
+              <div className="chart-split">
+                <div className="chart-pane">
+                  <h2>Spending by Category</h2>
+                  <SpendingDonut statements={statements} />
+                </div>
+                <div className="chart-split-divider" />
+                <div className="chart-pane">
+                  <BalanceChart statements={statements} />
+                </div>
+              </div>
             </div>
 
             <div className="section-block">

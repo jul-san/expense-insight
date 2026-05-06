@@ -520,7 +520,39 @@ border: 1px solid rgba(139,92,246,0.35);
 
 .hidden { display: none !important; }
 
+/* ── Chart split layout ───────────────────────────────────────────── */
+
+.chart-split {
+  display: flex;
+  align-items: flex-start;
+}
+
+.chart-split .chart-pane {
+  flex: 1;
+  min-width: 0;
+}
+
+.chart-split-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 0 1.75rem;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────── */
+
+@media (max-width: 680px) {
+  .chart-split {
+    flex-direction: column;
+  }
+  .chart-split-divider {
+    width: auto;
+    height: 1px;
+    align-self: auto;
+    margin: 1.5rem 0;
+  }
+}
 
 @media (max-width: 520px) {
   .tx-row { grid-template-columns: 48px 1fr auto; padding: 0.6rem 0.75rem; font-size: 0.78rem; }

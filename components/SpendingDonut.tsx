@@ -155,11 +155,11 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
   }, [statements]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      <div style={{ flexShrink: 0, width: 240, height: 240 }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+      <div style={{ flexShrink: 0, width: 220, height: 220 }}>
         <canvas ref={canvasRef} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ flex: '1 1 150px', display: 'flex', flexDirection: 'column', gap: 12 }}>
         {slices.map(s => {
           const pct = chartTotal > 0 ? ((s.value / chartTotal) * 100).toFixed(1) : '0.0';
           return (
