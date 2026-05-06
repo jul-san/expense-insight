@@ -63,19 +63,21 @@ export function TransactionDetails({ statements }: { statements: Statement[] }) 
   return (
     <>
       <div className="cat-grid">
-        {(Object.entries(CATS) as [CategoryKey, CategoryInfo][]).map(([key, info]) => (
-          <div
-            key={key}
-            className="cat-card"
-            style={{ '--clr': info.color } as React.CSSProperties}
-          >
-            <div className="cat-label">{info.label}</div>
-            <div className="cat-amount">{fmt(sumOf(merged[key]))}</div>
-            <div className="cat-count">
-              {merged[key].length} transaction{merged[key].length !== 1 ? 's' : ''}
+        {(Object.entries(CATS) as [CategoryKey, CategoryInfo][])
+          .filter(([key]) => merged[key].length > 0)
+          .map(([key, info]) => (
+            <div
+              key={key}
+              className="cat-card"
+              style={{ '--clr': info.color } as React.CSSProperties}
+            >
+              <div className="cat-label">{info.label}</div>
+              <div className="cat-amount">{fmt(sumOf(merged[key]))}</div>
+              <div className="cat-count">
+                {merged[key].length} transaction{merged[key].length !== 1 ? 's' : ''}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {(Object.entries(CATS) as [CategoryKey, CategoryInfo][])

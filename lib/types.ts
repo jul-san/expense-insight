@@ -37,7 +37,7 @@ export interface CategoryInfo {
 export const CATS: Record<CategoryKey, CategoryInfo> = {
   purchase:    { label: 'Purchases',          color: '#4f46e5' },
   recurring:   { label: 'Recurring Payments', color: '#0f766e' },
-  misc:        { label: 'Miscellaneous',      color: '#9333ea' },
-  deposit:     { label: 'Deposit',             color: '#16a34a' },
   investments: { label: 'Investments',        color: '#d97706' },
+  deposit:     { label: 'Deposit',            color: '#16a34a' },
+  misc:        { label: 'Miscellaneous',      color: '#9333ea' },
 };

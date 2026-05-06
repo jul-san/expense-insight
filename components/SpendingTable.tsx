@@ -13,12 +13,13 @@ export function SpendingTable({ statements }: { statements: Statement[] }) {
     totals.purchase    += p;
     totals.recurring   += r;
     totals.misc        += m;
-    totals.deposit      += n;
+    totals.deposit     += n;
     totals.investments += v;
-    return { label: s.label, p, r, m, n, v, t: p + r + m + v, bal: s.closingBalance };
+    return { label: s.label, p, r, m, n, v, t: n - (p + r + m + v), bal: s.closingBalance };
   });
 
-  const grandSpent = totals.purchase + totals.recurring + totals.misc + totals.investments;
+  const grandNet = totals.deposit - (totals.purchase + totals.recurring + totals.misc + totals.investments);
+  const hasMisc = totals.misc > 0;
 
   return (
     <div className="table-wrap">
@@ -28,10 +29,10 @@ export function SpendingTable({ statements }: { statements: Statement[] }) {
             <th>Period</th>
             <th style={{ color: 'var(--purchase)' }}>Purchases</th>
             <th style={{ color: 'var(--recurring)' }}>Recurring</th>
-            <th style={{ color: 'var(--misc)' }}>Misc</th>
             <th style={{ color: 'var(--investments)' }}>Investments</th>
             <th style={{ color: 'var(--deposit)' }}>Deposit</th>
-            <th>Total Spent</th>
+            {hasMisc && <th style={{ color: 'var(--misc)' }}>Misc</th>}
+            <th>Net</th>
             <th>Closing Balance</th>
           </tr>
         </thead>
@@ -41,9 +42,9 @@ export function SpendingTable({ statements }: { statements: Statement[] }) {
               <td className="td-period">{row.label}</td>
               <td className="td-purchase">{fmt(row.p)}</td>
               <td className="td-recurring">{fmt(row.r)}</td>
-              <td className="td-misc">{fmt(row.m)}</td>
               <td className="td-investments">{fmt(row.v)}</td>
               <td className="td-deposit">{fmt(row.n)}</td>
+              {hasMisc && <td className="td-misc">{fmt(row.m)}</td>}
               <td className="td-total">{fmt(row.t)}</td>
               <td className="td-balance">{row.bal != null ? fmt(row.bal) : '—'}</td>
             </tr>
@@ -52,10 +53,10 @@ export function SpendingTable({ statements }: { statements: Statement[] }) {
             <td className="td-period">All Periods</td>
             <td className="td-purchase">{fmt(totals.purchase)}</td>
             <td className="td-recurring">{fmt(totals.recurring)}</td>
-            <td className="td-misc">{fmt(totals.misc)}</td>
             <td className="td-investments">{fmt(totals.investments)}</td>
             <td className="td-deposit">{fmt(totals.deposit)}</td>
-            <td className="td-total">{fmt(grandSpent)}</td>
+            {hasMisc && <td className="td-misc">{fmt(totals.misc)}</td>}
+            <td className="td-total">{fmt(grandNet)}</td>
             <td />
           </tr>
         </tbody>

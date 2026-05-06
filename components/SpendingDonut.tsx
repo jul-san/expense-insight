@@ -21,7 +21,15 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
       deposit      += sumOf(s.transactions.deposit);
       investments += sumOf(s.transactions.investments);
     }
-    const grandTotal = purchase + recurring + misc + investments;
+    const grandNet = deposit - (purchase + recurring + misc + investments);
+
+    const slices = [
+      { label: 'Purchases',   value: purchase,    bg: 'rgba(79,70,229,0.8)',  border: '#4f46e5' },
+      { label: 'Recurring',   value: recurring,   bg: 'rgba(15,118,110,0.8)', border: '#0f766e' },
+      { label: 'Investments', value: investments, bg: 'rgba(217,119,6,0.8)',  border: '#d97706' },
+      { label: 'Deposit',     value: deposit,     bg: 'rgba(22,163,74,0.8)',  border: '#16a34a' },
+      ...(misc > 0 ? [{ label: 'Misc', value: misc, bg: 'rgba(147,51,234,0.8)', border: '#9333ea' }] : []),
+    ];
 
     const centerTextPlugin: Plugin<'doughnut'> = {
       id: 'centerText',
@@ -37,11 +45,11 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
 
         ctx.fillStyle = 'rgba(91,33,182,0.55)';
         ctx.font = '600 11px Inter, sans-serif';
-        ctx.fillText('TOTAL SPENT', cx, cy - 14);
+        ctx.fillText('NET', cx, cy - 14);
 
         ctx.fillStyle = '#1e1b4b';
         ctx.font = '800 20px Inter, sans-serif';
-        ctx.fillText(fmt(grandTotal), cx, cy + 10);
+        ctx.fillText(fmt(grandNet), cx, cy + 10);
 
         ctx.restore();
       },
@@ -51,17 +59,11 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
       type: 'doughnut',
       plugins: [centerTextPlugin],
       data: {
-        labels: ['Purchases', 'Recurring', 'Misc', 'Investments', 'Deposit'],
+        labels: slices.map(s => s.label),
         datasets: [{
-          data: [purchase, recurring, misc, investments, deposit],
-          backgroundColor: [
-            'rgba(79,70,229,0.8)',
-            'rgba(15,118,110,0.8)',
-            'rgba(147,51,234,0.8)',
-            'rgba(217,119,6,0.8)',
-            'rgba(22,163,74,0.8)',
-          ],
-          borderColor: ['#4f46e5', '#0f766e', '#9333ea', '#d97706', '#16a34a'],
+          data: slices.map(s => s.value),
+          backgroundColor: slices.map(s => s.bg),
+          borderColor: slices.map(s => s.border),
           borderWidth: 2,
           hoverOffset: 10,
         }],
