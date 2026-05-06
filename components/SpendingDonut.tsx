@@ -13,14 +13,15 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
   useEffect(() => {
     if (!canvasRef.current || statements.length === 0) return;
 
-    let purchase = 0, recurring = 0, misc = 0, income = 0;
+    let purchase = 0, recurring = 0, misc = 0, income = 0, investments = 0;
     for (const s of statements) {
-      purchase  += sumOf(s.transactions.purchase);
-      recurring += sumOf(s.transactions.recurring);
-      misc      += sumOf(s.transactions.misc);
-      income    += sumOf(s.transactions.income);
+      purchase    += sumOf(s.transactions.purchase);
+      recurring   += sumOf(s.transactions.recurring);
+      misc        += sumOf(s.transactions.misc);
+      income      += sumOf(s.transactions.income);
+      investments += sumOf(s.transactions.investments);
     }
-    const grandTotal = purchase + recurring + misc;
+    const grandTotal = purchase + recurring + misc + investments;
 
     const centerTextPlugin: Plugin<'doughnut'> = {
       id: 'centerText',
@@ -49,16 +50,17 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
       type: 'doughnut',
       plugins: [centerTextPlugin],
       data: {
-        labels: ['Purchases', 'Recurring', 'Misc', 'Income'],
+        labels: ['Purchases', 'Recurring', 'Misc', 'Investments', 'Income'],
         datasets: [{
-          data: [purchase, recurring, misc, income],
+          data: [purchase, recurring, misc, investments, income],
           backgroundColor: [
             'rgba(79,70,229,0.8)',
             'rgba(15,118,110,0.8)',
             'rgba(147,51,234,0.8)',
+            'rgba(217,119,6,0.8)',
             'rgba(22,163,74,0.8)',
           ],
-          borderColor: ['#4f46e5', '#0f766e', '#9333ea', '#16a34a'],
+          borderColor: ['#4f46e5', '#0f766e', '#9333ea', '#d97706', '#16a34a'],
           borderWidth: 2,
           hoverOffset: 10,
         }],

@@ -101,7 +101,7 @@ function extractBalances(lines: string[]): BalanceInfo {
 // ── Transaction parsing ───────────────────────────────────────────────────────
 
 function parseTransactions(lines: string[]): TransactionGroups {
-  const groups: TransactionGroups = { purchase: [], recurring: [], misc: [], income: [] };
+  const groups: TransactionGroups = { purchase: [], recurring: [], misc: [], income: [], investments: [] };
   for (const line of lines) {
     const tx = parseLine(line);
     if (tx) groups[tx.category].push(tx);
@@ -138,6 +138,11 @@ function parseLine(raw: string): Transaction | null {
     /ACH\s+PAYMEN/i.test(description) ||
     /PAYROLL/i.test(description)
   )                                              category = 'income';
+  else if (
+    /ROBINHOOD/i.test(description) ||
+    /COINBASE/i.test(description) ||
+    /FID/i.test(description)
+  )                                              category = 'investments';
   else                                           category = 'misc';
 
   return { date, description, amount, category };

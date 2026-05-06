@@ -49,7 +49,7 @@ function Accordion({
 
 export function TransactionDetails({ statements }: { statements: Statement[] }) {
   const merged: Record<CategoryKey, MergedTransaction[]> = {
-    purchase: [], recurring: [], misc: [], income: [],
+    purchase: [], recurring: [], misc: [], income: [], investments: [],
   };
 
   for (const s of statements) {
