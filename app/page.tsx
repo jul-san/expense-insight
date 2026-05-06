@@ -5,6 +5,7 @@ import type { Statement } from '@/lib/types';
 import { processFile } from '@/lib/parser';
 import { UploadZone } from '@/components/UploadZone';
 import { BalanceChart } from '@/components/BalanceChart';
+import { SpendingDonut } from '@/components/SpendingDonut';
 import { SpendingTable } from '@/components/SpendingTable';
 import { TransactionDetails } from '@/components/TransactionDetails';
 
@@ -96,8 +97,12 @@ export default function Home() {
             </div>
 
             <div className="section-block">
-              <h2>Account Balance Over Time</h2>
               <BalanceChart statements={statements} />
+            </div>
+
+            <div className="section-block">
+              <h2>Spending by Category</h2>
+              <SpendingDonut statements={statements} />
             </div>
 
             <div className="section-block">
