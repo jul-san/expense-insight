@@ -136,6 +136,7 @@ function parseLine(raw: string): Transaction | null {
   else if (/DEBIT\s+CARD\s+RECURRING/.test(up)) category = 'recurring';
   else if (/ZELLE\s+PAYMENT\s+TO/i.test(description))              category = 'purchase';
   else if (/^TRUIST\s+ONLINE\s+TRANSFER\s+MOBILE\s+TO/i.test(description)) category = 'purchase';
+  else if (/^DEBIT\s+CARD\s+RETURN/i.test(description))            category = 'deposit';
   else if (/^VISA\s+MONEY\s+TRANSFER\s+DEBIT/i.test(description))  category = 'purchase';
   else if (/^WISE\s+Wise\s+Inc/i.test(description))                category = 'purchase';
   else if (/ATM\s+NETWORK\s+CASH\s+WITHDRAWAL/i.test(description)) category = 'purchase';
