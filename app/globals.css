@@ -18,7 +18,7 @@
   --purple-dim: rgba(124,58,237,0.08);
 
   --purchase: #4f46e5;
-  --recurring: #0f766e;
+  --recurring: #0891b2;
   --misc: #9333ea;
   --deposit: #16a34a;
   --investments: #d97706;
@@ -78,6 +78,34 @@ header p {
   margin-top: 0.4rem;
   font-size: 0.875rem;
   font-weight: 400;
+}
+
+.privacy-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding: 0.45rem 0.85rem;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  color: #b91c1c;
+}
+
+.privacy-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 /* ── Main ─────────────────────────────────────────────────────────── */

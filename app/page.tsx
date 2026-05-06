@@ -71,6 +71,10 @@ export default function Home() {
           <h1>Expense Insight</h1>
         </div>
         <p>Upload Truist bank statements to track spending and account balance over time</p>
+        <p className="privacy-note">
+          <span className="privacy-icon">!</span>
+          Your statements are processed entirely in your browser. No data is uploaded or stored anywhere.
+        </p>
       </header>
 
       <main>

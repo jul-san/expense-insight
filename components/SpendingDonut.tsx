@@ -77,11 +77,11 @@ function buildSlices(statements: Statement[]): { slices: Slice[]; grandNet: numb
     investments += sumOf(s.transactions.investments);
   }
   const slices: Slice[] = [
-    { label: 'Purchases',   value: purchase,    bg: 'rgba(79,70,229,0.8)',  border: '#4f46e5' },
-    { label: 'Recurring',   value: recurring,   bg: 'rgba(15,118,110,0.8)', border: '#0f766e' },
-    { label: 'Investments', value: investments, bg: 'rgba(217,119,6,0.8)',  border: '#d97706' },
-    { label: 'Deposit',     value: deposit,     bg: 'rgba(22,163,74,0.8)',  border: '#16a34a' },
-    ...(misc > 0 ? [{ label: 'Misc', value: misc, bg: 'rgba(147,51,234,0.8)', border: '#9333ea' }] : []),
+    { label: 'Purchases',   value: purchase,    bg: '#4f46e5', border: '#4338ca' },
+    { label: 'Recurring',   value: recurring,   bg: '#0891b2', border: '#0e7490' },
+    { label: 'Investments', value: investments, bg: '#d97706', border: '#b45309' },
+    { label: 'Deposit',     value: deposit,     bg: '#16a34a', border: '#15803d' },
+    ...(misc > 0 ? [{ label: 'Misc', value: misc, bg: '#9333ea', border: '#7e22ce' }] : []),
   ];
   return { slices, grandNet: deposit - (purchase + recurring + misc + investments) };
 }
@@ -110,7 +110,7 @@ export function SpendingDonut({ statements }: { statements: Statement[] }) {
         ctx.fillStyle = 'rgba(91,33,182,0.55)';
         ctx.font = '600 10px Inter, sans-serif';
         ctx.fillText('CASH FLOW', cx, cy - 14);
-        ctx.fillStyle = '#1e1b4b';
+        ctx.fillStyle = net >= 0 ? '#15803d' : '#dc2626';
         ctx.font = '800 20px Inter, sans-serif';
         ctx.fillText(fmt(net), cx, cy + 10);
         ctx.restore();
