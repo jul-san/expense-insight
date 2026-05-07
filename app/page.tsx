@@ -57,6 +57,22 @@ export default function Home() {
 
   const clearAll = useCallback(() => setStatements([]), []);
 
+  const loadSynthetic = useCallback(async () => {
+    setStatus('Loading synthetic statements…');
+    try {
+      const names: string[] = await fetch('/api/synthetic-statements').then(r => r.json());
+      const files = await Promise.all(
+        names.map(async name => {
+          const blob = await fetch(`/synthetic_statements/${name}`).then(r => r.blob());
+          return new File([blob], name, { type: 'application/pdf' });
+        })
+      );
+      await handleFiles(files);
+    } catch {
+      setStatus('Failed to load synthetic statements.');
+    }
+  }, [handleFiles]);
+
   const hasStatements = statements.length > 0;
 
   return (
@@ -81,6 +97,14 @@ export default function Home() {
 
       <main>
         <UploadZone compact={hasStatements} onFiles={handleFiles} />
+
+        {!hasStatements && (
+          <div style={{ textAlign: 'center', marginTop: '0.75rem' }}>
+            <button className="btn-synthetic" onClick={loadSynthetic}>
+              Try with synthetic data
+            </button>
+          </div>
+        )}
 
         {status && <div id="status">{status}</div>}
 
