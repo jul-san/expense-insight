@@ -16,9 +16,9 @@
 - **Multi-statement** — upload multiple statements at once; entries are deduplicated and sorted by date
 - **Privacy** — all PDF parsing happens in the browser via PDF.js; nothing is uploaded or stored
 
-## Synthetic data
+## Synthetic Data
 
-Included is a folder (synthetic_statements) with a set of synthetic Truist-style PDF statements for feature testing.
+Included is `public/synthetic_statements/`, a set of synthetic Truist-style PDF statements for feature testing. On the site, click **Try with synthetic data** to load them instantly without uploading anything.
 
 ## Getting Started
 
